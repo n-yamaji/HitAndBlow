@@ -39,10 +39,10 @@ namespace HitAndBlow
                         result++;
                     }
                 }
-
-                this.hitBlow = result;
-                return result;
             }
+
+            this.hitBlow = result;
+            return result;
         }
 
         public  int GetHitBlow()
