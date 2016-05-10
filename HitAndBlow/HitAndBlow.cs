@@ -19,7 +19,7 @@ namespace HitAndBlow
                 for (int j = 1; j <= 9; j++)
                 {
                     if (i == j) continue;
-                    for (int k = 1; k <= 9; k++)
+                    for (int k = 1; k <= 9; k++)                
                     {
                         if (i == k) continue;
                         if (j == k) continue;
