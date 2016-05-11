@@ -8,6 +8,7 @@ namespace HitAndBlow
 {
     public class Number
     {
+        private const int digitLength = 4;
         private int[] number;
 
         public Number(int digit1, int digit2, int digit3, int digit4)
@@ -18,7 +19,7 @@ namespace HitAndBlow
         public HitBlowSet AnswerHitBlow(Number callNumber)
         {
             var hitBlow = new HitBlowSet(0, 0);
-            for (int digit = 0; digit < 4; digit++)
+            for (int digit = 0; digit < digitLength; digit++)
             {
                 int value = callNumber.GetValue(digit);
                 if (this.IsHit(digit,value))
