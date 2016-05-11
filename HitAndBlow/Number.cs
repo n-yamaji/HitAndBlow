@@ -11,18 +11,26 @@ namespace HitAndBlow
         private const int digitLength = 4;
         private int[] number;
 
+        public int DigitLength
+        {
+            get
+            {
+                return digitLength;
+            }
+        }
+
         public Number(int digit1, int digit2, int digit3, int digit4)
         {
-            this.number = new int[4] { digit1, digit2, digit3, digit4 };
+            this.number = new int[digitLength] { digit1, digit2, digit3, digit4 };
         }
 
         public HitBlowSet AnswerHitBlow(Number callNumber)
         {
             var hitBlow = new HitBlowSet(0, 0);
-            for (int digit = 0; digit < digitLength; digit++)
+            for (int digit = 0; digit < this.DigitLength; digit++)
             {
                 int value = callNumber.GetValue(digit);
-                if (this.IsHit(digit,value))
+                if (this.IsHit(digit, value))
                 {
                     hitBlow.Hit();
                     continue;
@@ -41,13 +49,13 @@ namespace HitAndBlow
         {
             return this.number[digit] == value;
         }
-        
+
         private bool IsBlow(int value)
         {
             return this.number.Contains(value);
         }
 
-        private int GetValue(int digit)
+        public int GetValue(int digit)
         {
             return this.number[digit];
         }

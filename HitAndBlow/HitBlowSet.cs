@@ -8,23 +8,23 @@ namespace HitAndBlow
 {
     public class HitBlowSet
     {
-        private int hit;
-        private int blow;
+        public int HitCount { get; private set; }
+        public int BlowCount { get; private set; }
 
         public HitBlowSet(int hit,int blow)
         {
-            this.hit = hit;
-            this.blow = blow;
+            this.HitCount = hit;
+            this.BlowCount = blow;
         }
 
         public void Hit()
         {
-            this.hit++;
+            this.HitCount++;
         }
 
         public void Blow()
         {
-            this.blow++;
+            this.BlowCount++;
         }
     }
 }

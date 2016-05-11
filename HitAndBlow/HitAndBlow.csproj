@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpectedValue.cs" />
+    <Compile Include="ExpectedValueCalculator.cs" />
     <Compile Include="HitAndBlow.cs" />
     <Compile Include="HitBlowSet.cs" />
     <Compile Include="Number.cs" />
