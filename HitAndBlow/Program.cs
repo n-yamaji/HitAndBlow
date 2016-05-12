@@ -10,19 +10,36 @@ namespace HitAndBlow
     {
         static void Main(string[] args)
         {
-            HitAndBlow hab = new HitAndBlow();
-            Suite answer = new Suite(5, 0, 6, 7);
-            for (int i = 0; i < 100; i++)
+            var expectedValueCalculator = new ExpectedValueCalculator(4);
+            while (true)
             {
-                int[] tempAnswer = hab.Answer();
-                int tempHb = answer.CheckHitBlow(tempAnswer);
-                if (tempHb == 40)
-                {
-                    break;
-                }
+                string[] parameters = Console.ReadLine().Split(',');
 
-                hab.SetResult(tempHb);
+                var callNumber = new Number(1,1,1,1);
+
+                int hitCount = int.Parse(parameters[1]);
+                int blowCount = int.Parse(parameters[2]);
+                var hitBlow = new HitBlowSet(hitCount, blowCount);
+
+                foreach (var number in expectedValueCalculator.Calculate(callNumber, hitBlow))
+                {
+                    Console.WriteLine(number);   
+                }
             }
+
+            //HitAndBlow hab = new HitAndBlow();
+            //Suite answer = new Suite(5, 0, 6, 7);
+            //for (int i = 0; i < 100; i++)
+            //{
+            //    int[] tempAnswer = hab.Answer();
+            //    int tempHb = answer.CheckHitBlow(tempAnswer);
+            //    if (tempHb == 40)
+            //    {
+            //        break;
+            //    }
+
+            //    hab.SetResult(tempHb);
+            //}
 
             //var patterns = new Patterns();
             //for (int i = 1; i <= 9; i++)

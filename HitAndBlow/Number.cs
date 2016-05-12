@@ -59,5 +59,11 @@ namespace HitAndBlow
         {
             return this.number[digit];
         }
+
+        public override string ToString()
+        {
+            string[] numberArray = this.number.Select(_ => _.ToString()).ToArray();
+            return string.Join(string.Empty, numberArray);
+        }
     }
 }

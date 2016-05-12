@@ -9,7 +9,7 @@ namespace HitAndBlow
     public class ExpectedValueCalculator
     {
         private Dictionary<int, ExpectedValue> eachDigit;
-        private ExpectedValue value;
+        private HashSet<int> zeroExpectedValues;
         private List<Number> calledNumbers;
 
         public ExpectedValueCalculator(int digitLength)
@@ -20,7 +20,7 @@ namespace HitAndBlow
                 this.eachDigit.Add(digit, new ExpectedValue());
             }
 
-            this.value = new ExpectedValue();
+            this.zeroExpectedValues = new HashSet<int>();
             this.calledNumbers = new List<Number>();
         }
 
@@ -33,19 +33,25 @@ namespace HitAndBlow
                 this.eachDigit[digit].Calculate(callNumber, hitBlow);
             }
 
-            this.value.Calculate(callNumber, hitBlow);
+            if (!hitBlow.IsHit)
+            {
+                for (int digit = 1; digit <= callNumber.DigitLength; digit++)
+                {
+                    int value = callNumber.GetValue(digit);
+                    this.zeroExpectedValues.Add(value);
+                }
+            }
 
             return this.CreateHighExpectedNumbers(callNumber.DigitLength);
         }
 
         private IEnumerable<Number> CreateHighExpectedNumbers(int digitLength)
         {
-            var zeroExpectedValues = this.value.GetZeroExpectedValues();
             var eachDigitHighScoreValues = new Dictionary<int, IEnumerable<int>>();
             for (int digit = 1; digit <= digitLength; digit++)
             {
                 var highOrderDigitExpextecValues = this.eachDigit[digit].GetExpectedValuesByDesc();
-                var allowedValues = highOrderDigitExpextecValues.Except(zeroExpectedValues);
+                var allowedValues = highOrderDigitExpextecValues.Except(this.zeroExpectedValues);
                 eachDigitHighScoreValues.Add(digit, allowedValues);
             }
 

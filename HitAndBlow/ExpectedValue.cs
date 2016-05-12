@@ -21,13 +21,14 @@ namespace HitAndBlow
 
         public void Calculate(Number callNumber, HitBlowSet hitBlow)
         {
-            int count = hitBlow.HitCount + hitBlow.BlowCount;
+            int hitCount = hitBlow.HitCount;
+            int blowCount = hitBlow.BlowCount;
 
             for (int digit = 1; digit <= callNumber.DigitLength; digit++)
             {
                 int value = callNumber.GetValue(digit);
 
-                if (count == 0)
+                if (hitCount == 0)
                 {
                     this.expectedValue[value] = 0;
                     continue;
@@ -40,11 +41,6 @@ namespace HitAndBlow
         public IEnumerable<int> GetExpectedValuesByDesc()
         {
             return this.expectedValue.OrderByDescending(_ => _.Value).Select(_ => _.Key);
-        }
-
-        public IEnumerable<int> GetZeroExpectedValues()
-        {
-            return this.expectedValue.Where(_ => _.Value == 0).Select(_ => _.Key);
         }
     }
 }
